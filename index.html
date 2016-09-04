@@ -17,26 +17,44 @@
   <script src="js/vector.js"></script>
   <script src="js/canvas.js"></script>
   <script src="js/body.js"></script>
+  <script src="js/sprites.js"></script>
 
   <script>
+    var spritesheet = new Image()
+    var sprite;
+
+    spritesheet.onload = function() {
+      sprite = new Game.Sprite({
+        image: spritesheet,
+        frames: 5,
+        speed: 1
+      })
+
+      setInterval(loop, 100);
+    }
+    spritesheet.src = 'img/oscar-explodes-sprite.png'
     var canvas = new Game.Canvas('#world')
-    var being = new Game.Body({
-      x: 100,
-      y: 200
-    });
+    // var being = new Game.Sprite({
+    //   x: 100,
+    //   y: 200
+    // })
 
-    being.applyForce({x: 1, y: 1})
+    var sprite = new Game.Sprite({
+      image: spritesheet,
+      frames: 5
+    })
 
-    //*************************
+    // being.applyForce({x: 1, y: 1})
+
+    //********* game loop
     var loop = function() {
-      being.update()
+      sprite.update()
 
       canvas.clear()
-      canvas.circle(being)
+      canvas.draw({sprite: sprite, body: {pos: {x: 100, y: 100}}})
       canvas.render()
     }
 
-    setInterval(loop, 100);
 
   </script>
 </body>
