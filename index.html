@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=1">
+  <title>Example</title>
+  <style>
+
+    .myCanvas {
+      border: 1px solid black;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="world" class="myCanvas" width="400" height="400"></canvas>
+
+  <script src="js/vector.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/body.js"></script>
+
+  <script>
+  
+    var being = new Game.Body({
+      x: 100,
+      y: 200
+    });
+
+    being.applyForce({x: 1, y: 1})
+
+    //*************************
+    var loop = function() {
+      being.update()
+
+      canvas.clear()
+      canvas.circle(being)
+      canvas.render()
+    }
+
+    setInterval(loop, 100);
+
+  </script>
+</body>
+</html>
