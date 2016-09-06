@@ -19,35 +19,30 @@
   <script src="js/body.js"></script>
   <script src="js/display_object.js"></script>
   <script src="js/slice.js"></script>
+  <script src="js/skeleton.js"></script>
+  <script src="js/skeleton_example.js"></script>
 
   <script>
     var spritesheet = new Image()
     var canvas = new Game.Canvas('#world')
-    var slice = Slice(0,0,1,canvas)
+    var skeleton = Skeleton({
+      x: 100,
+      y: 200
+    })
 
     spritesheet.onload = function() {
-      slice.addSprite('explode', {
-          x: 100,
-          y: 100,
-          image: displayObject({
-            image:spritesheet,
-            sWidth: 108,
-            sHeight: 125,
-            sX: 0,
-            sY: 0,
-          })
-        },5);
-
-      setInterval(loop, 100);
+      buildSkeleton()
+      setInterval(loop, 50);
     }
-    spritesheet.src = 'img/oscar-explodes-sprite.png'
+    spritesheet.src = 'img/oscar-slices.png'
 
-    //********* game loop
+    // //********* game loop
     var loop = function() {
-      slice.update()
-
       canvas.clear()
-      slice.draw()
+
+      skeleton.update()
+      skeleton.draw()
+
       canvas.render()
     }
 
